@@ -1,6 +1,3 @@
-# Prerequisites
-*.d
-
 # Compiled Object files
 *.slo
 *.lo
@@ -30,3 +27,24 @@
 *.exe
 *.out
 *.app
+
+# useless things
+# main.cpp
+
+# Created by IDE
+  #codeblocks
+*.cbp
+*.layout
+*.depend
+**bin
+**obj
+
+  #embarcadero
+**win32
+**__history
+**__recovery
+*.cbproj
+*cbproj.local
+*.res
+**temp
+**stat
