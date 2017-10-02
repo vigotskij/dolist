@@ -196,12 +196,25 @@ class DOList<char*>: public IList<char*> {
 				Node& operator= ( const Node &otherNode ) ;
 		} ;
 
-		Node *first ;
-		Node *last ;
+		Node *first , *last ;
 
 		size itemCount ;
 
 		// helpers
+		Pos _indexOf_( const char *value ) {
+			Pos tr = -1 ;
+			if( !isEmpty() ){
+				Node *actual = first ;
+				Pos position = 0 ;
+				for( ;
+					actual != nullptr && *actual->value != *value ;
+					actual = actual->next ) {
+						position++ ;
+				}
+			if( actual != nullptr && *actual->value == *value ) tr = position ;
+			}
+			return  tr ;
+		}
 		Node* _findNode_( const char* value ) {
 			Node *found = nullptr ;
 			if( !isEmpty() ){
@@ -240,20 +253,7 @@ class DOList<char*>: public IList<char*> {
 		DOList(const DOList &otherList ) ;
 		// operator=
 		DOList& operator=( const DOList& otherList ) ;
-		Pos _indexOf_( const char *value ) {
-			Pos tr = -1 ;
-			if( !isEmpty() ){
-				Node *actual = first ;
-				Pos position = 0 ;
-				for( ;
-					actual != nullptr && *actual->value != *value ;
-					actual = actual->next ) {
-						position++ ;
-				}
-			if( actual != nullptr && *actual->value == *value ) tr = position ;
-			}
-			return  tr ;
-		}
+
 
 public:
 	//constr&dest
@@ -381,7 +381,7 @@ public:
 		char *toCompare ;
 		if( actual == nullptr ) toCompare = NULL ;
 		if ( actual!= nullptr ) toCompare = actual->value ;
-		return toCompare == value ;
+		return *toCompare == *value ;
 	}
 	// manage functions
 	void emptyList( void ) {
@@ -392,3 +392,4 @@ public:
 	void cleanRepeated( void ) { }
 	void allocPtr( void ) { }
 } ;
+
