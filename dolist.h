@@ -36,12 +36,12 @@ class DOList: public IList<ItemType>{
 		size itemCount ;
 
 		// helpers
-		Pos _indexOf_( const ItemType value ) ;
+		Pos _indexOf_( const ItemT value ) ;
 
-		Node* _findNode_( const ItemType value ) {
+		Node* _findNode_( const char *value ) {
 			Node *found = nullptr ;
 			if( !isEmpty() ){
-                Node *actual = first ;
+				Node *actual = first ;
 				for( ;
 					 actual == nullptr && actual->value == value ;
 					 actual = actual->next ) ;
@@ -63,7 +63,7 @@ class DOList: public IList<ItemType>{
 			return found ;
 		}
 
-		Node* _sortItem_( ItemType value ) {
+		Node* _sortItem_( const char *value ) {
 			Node *actual = nullptr ;
 			if( !isEmpty()){
 				actual = first ;
@@ -72,7 +72,7 @@ class DOList: public IList<ItemType>{
 					 actual = actual->next ) ;
 			}
 			return actual;
-        }
+		}
 		// copy constructor ;
 		DOList(const DOList &otherList ) ;
 		// operator=
