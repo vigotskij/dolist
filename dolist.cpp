@@ -353,7 +353,7 @@ public:
 		}
 		return tr ;
 	}
-	bool replace( const char *valueOut, const char *valueIn ) {
+	bool replace( const char *valueOut, char *valueIn ) {
 		bool tr = false ;
 		if( contained( valueOut ) ) {
 			extractByValue( valueOut ) ;

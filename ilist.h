@@ -7,12 +7,12 @@ template <class ItemType>
 class IList{
 	public:
 		// adding, deleting and replacing functions
-		virtual void insert( const ItemType value ) = 0 ;
+		virtual void insert( ItemType value ) = 0 ;
 		virtual ItemType extractByValue( const ItemType value ) = 0 ;
 		virtual ItemType extractByIndex( const Pos position ) = 0 ;
 		virtual ItemType extractFirst( void ) = 0 ;
 		virtual ItemType extractLast( void ) = 0 ;
-		virtual bool replace( const ItemType valueOut, const ItemType valueIn ) = 0 ;
+		virtual bool replace( const ItemType valueOut, ItemType valueIn ) = 0 ;
 		// capacity and info functions
 		virtual bool isEmpty( void ) = 0 ;
 		virtual size listSize( void ) = 0 ;
