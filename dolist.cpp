@@ -55,6 +55,7 @@ void DOList<ItemType>::insert( const ItemType value ){
 			} else if ( first == last && first != nullptr ) {
 				newNode->prev = first ;
 				newNode->next = nullptr ;
+				first->next = newNode ;
 
 				last = newNode ;
 			} else if ( first != last ) {
