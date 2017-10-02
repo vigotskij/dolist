@@ -84,12 +84,12 @@ class DOList: public IList<ItemType>{
 		DOList( void ) ;
 		~DOList( void ) ;
 		// adding, deleting and replacing functions
-		virtual void insert( const ItemType value ) ;
+		virtual void insert( ItemType value ) ;
 		virtual ItemType extractByValue( const ItemType value ) ;
 		virtual ItemType extractByIndex( const Pos position ) ;
 		virtual ItemType extractFirst( void ) ;
 		virtual ItemType extractLast( void ) ;
-		virtual bool replace( const ItemType valueOut, const ItemType valueIn ) ;
+		virtual bool replace( const ItemType valueOut, ItemType valueIn ) ;
 		// capacity and info functions
 		virtual bool isEmpty( void ) ;
 		virtual size listSize( void ) ;

@@ -34,7 +34,7 @@ DOList<ItemType>::~DOList( void ){
 
 // adding, deleting and replacing functions
 template <class ItemType>
-void DOList<ItemType>::insert( const ItemType value ){
+void DOList<ItemType>::insert( ItemType value ){
 	if( !contained( value ) ) {
 		Node *newNode = new Node ;
 		newNode->value = value ;
@@ -125,7 +125,7 @@ ItemType DOList<ItemType>::extractLast( void ) {
 	return tr ;
 }
 template <class ItemType>
-bool DOList<ItemType>::replace( const ItemType valueOut, const ItemType valueIn ) {
+bool DOList<ItemType>::replace( const ItemType valueOut, ItemType valueIn ) {
 	bool tr = false ;
 	if( contained( valueOut ) ) {
 		extractByValue( valueOut ) ;
