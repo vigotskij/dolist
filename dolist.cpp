@@ -6,14 +6,14 @@ template <class ItemType>
 Pos DOList<ItemType>::_indexOf_( const ItemType value ) {
 	Pos tr = -1 ;
 	if( !isEmpty() ){
-		Node *actual = first ;
+		Node *current = first ;
 		Pos position = 0 ;
 		for( ;
-			actual != nullptr && *actual->value != *value ;
-			actual = actual->next ) {
+			current != nullptr && current->value != value ;
+			current = current->next ) {
 				position++ ;
 		}
-		if( actual != nullptr && *actual->value == *value ) tr = position ;
+		if( current != nullptr && current->value == value ) tr = position ;
 	}
 	return  tr ;
 }
@@ -146,17 +146,19 @@ size DOList<ItemType>::listSize( void ) {
 }
 template <class ItemType>
 Pos DOList<ItemType>::indexOf( const ItemType value ) {
-	return _indexOf_( value ) ;
+	Pos tr = -1 ;
+	if( !isEmpty() ) tr = _indexOf_( value ) ;
+	return tr ;
 }
 template <class ItemType>
 bool DOList<ItemType>::contained( const ItemType value ) {
-	Node *actual = first ;
+	Node *current = first ;
 	for( ;
-		actual != nullptr && actual->value != value ;
-		actual = actual->next ) ;
+		current != nullptr && current->value != value ;
+		current = current->next ) ;
 	ItemType toCompare ;
-	if( actual == nullptr ) toCompare = NULL ;
-	if ( actual!= nullptr ) toCompare = actual->value ;
+	if( current == nullptr ) toCompare = NULL ;
+	if( current != nullptr ) toCompare = current->value ;
 	return toCompare == value ;
 }
 // manage functions
@@ -185,8 +187,7 @@ class DOList<char*>: public IList<char*> {
 			Node *prev ;
 
 			Node( void ){
-				value = nullptr ;
-				next, prev = nullptr ;
+				value, next, prev = nullptr ;
 
 			}
 			~Node( void ) { } ;
@@ -204,50 +205,50 @@ class DOList<char*>: public IList<char*> {
 		Pos _indexOf_( const char *value ) {
 			Pos tr = -1 ;
 			if( !isEmpty() ){
-				Node *actual = first ;
+				Node *current = first ;
 				Pos position = 0 ;
 				for( ;
-					actual != nullptr && *actual->value != *value ;
-					actual = actual->next ) {
+					current != nullptr && *current->value != *value ;
+					current = current->next ) {
 						position++ ;
 				}
-			if( actual != nullptr && *actual->value == *value ) tr = position ;
+			if( current != nullptr && *current->value == *value ) tr = position ;
 			}
 			return  tr ;
 		}
 		Node* _findNode_( const char* value ) {
 			Node *found = nullptr ;
 			if( !isEmpty() ){
-				Node *actual = first ;
+				Node *current = first ;
 				for( ;
-					 actual == nullptr && *actual->value == *value ;
-					 actual = actual->next ) ;
-						found = actual ;
+					 current != nullptr && *current->value != *value ;
+					 current = current->next ) ;
+						found = current ;
 			}
 			return found ;
 		}
 		Node* _findNodeByIndex_ ( const Pos position ){
 			Pos count = 0 ;
-			Node *actual = first ;
+			Node *current = first ;
 			Node *found = nullptr ;
 			for (;
-				actual != nullptr ;
-				actual = actual->next ){
-				if( position == count ) found = actual ;
+				current != nullptr ;
+				current = current->next ){
+				if( position == count ) found = current ;
 				count++ ;
 			}
 			return found ;
 		}
 
 		Node* _sortItem_( char *value ) {
-			Node *actual = nullptr ;
+			Node *current = nullptr ;
 			if( !isEmpty()){
-				actual = first ;
+				current = first ;
 				for( ;
-					 actual != nullptr && *actual->value < *value ;
-					 actual = actual->next ) ;
+					 current != nullptr && *current->value < *value ;
+					 current = current->next ) ;
 			}
-			return actual;
+			return current ;
 		}
 		// copy constructor ;
 		DOList(const DOList &otherList ) ;

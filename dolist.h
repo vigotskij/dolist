@@ -41,37 +41,37 @@ class DOList: public IList<ItemType>{
 		Node* _findNode_( const ItemType value ) {
 			Node *found = nullptr ;
 			if( !isEmpty() ){
-				Node *actual = first ;
+				Node *current = first ;
 				for( ;
-					 actual == nullptr && *actual->value == *value ;
-					 actual = actual->next ) ;
+					 current != nullptr && current->value != value ;
+					 current = current->next ) ;
 
-				found = actual ;
+				found = current ;
 			}
 			return found ;
 		}
 		Node* _findNodeByIndex_ ( const Pos position ){
 			Pos count = 0 ;
-			Node *actual = first ;
+			Node *current = first ;
 			Node *found = nullptr ;
 			for (;
-				actual != nullptr ;
-				actual = actual->next ){
-				if( position == count ) found = actual ;
+				current != nullptr ;
+				current = current->next ){
+				if( position == count ) found = current ;
 				count++ ;
 			}
 			return found ;
 		}
 
 		Node* _sortItem_( const ItemType value ) {
-			Node *actual = nullptr ;
+			Node *current = nullptr ;
 			if( !isEmpty()){
-				actual = first ;
+				current = first ;
 				for( ;
-					 actual != nullptr && actual->value < value ;
-					 actual = actual->next ) ;
+					 current != nullptr && current->value < value ;
+					 current = current->next ) ;
 			}
-			return actual;
+			return current;
 		}
 		// copy constructor ;
 		DOList(const DOList &otherList ) ;
