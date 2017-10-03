@@ -257,7 +257,7 @@ class DOList<char*>: public IList<char*> {
 		DOList& operator=( const DOList& otherList ) ;
 
 
-public:
+ public:
 	//constr&dest
 	DOList( void ){
 		first, last = nullptr ;
