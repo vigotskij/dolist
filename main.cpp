@@ -11,7 +11,8 @@ int main( int argv , char* argc[] ){
 	// std::cout << list->extractByValue( "hola" ) << std::endl ;
 	list->insert( "chau" ) ;
 	std::cout << list->indexOf( "chau" ) << std::endl ;
-    std::cout << list->extractFirst() << std::endl ;
+	std::cout << list->extractFirst() << std::endl ;
+//	std::cout << list->extractFirst() << std::endl ;
 
 	system("pause") ;
 

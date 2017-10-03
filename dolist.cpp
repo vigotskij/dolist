@@ -1,6 +1,7 @@
 #ifndef DOLIST_H
 	#include "dolist.h"
 #endif
+
 //PRIVATE:
 template <class ItemType>
 Pos DOList<ItemType>::_indexOf_( const ItemType value ) {
@@ -393,4 +394,3 @@ public:
 	void cleanRepeated( void ) { }
 	void allocPtr( void ) { }
 } ;
-
