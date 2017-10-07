@@ -199,13 +199,13 @@ class DOList<char*>: public IList<char*> {
 		return _indexOf_( value ) ;
 	}
 	bool contained( const char *value ) {
-		Node *actual = first ;
+		Node *current = first ;
 		for( ;
-			actual != nullptr && *actual->value != *value ;
-			actual = actual->next ) ;
+			current != nullptr && *current->value != *value ;
+			current = current->next ) ;
 		char *toCompare ;
-		if( actual == nullptr ) toCompare = NULL ;
-		if ( actual!= nullptr ) toCompare = actual->value ;
+		if( current == nullptr ) toCompare = NULL ;
+		if ( current != nullptr ) toCompare = current->value ;
 		return *toCompare == *value ;
 	}
 	// manage functions
