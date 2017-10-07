@@ -87,34 +87,25 @@ class DOList: public IList<ItemType>{
 		~DOList( void ) ;
 		// adding, deleting and replacing functions
 		virtual void insert( ItemType value ) ;
-		virtual ItemType extractByValue( const ItemType value ) ;
-		virtual ItemType extractByIndex( const Pos position ) ;
+		virtual ItemType extractByValue( ItemType value ) ;
+		virtual ItemType extractByIndex( Pos position ) ;
 		virtual ItemType extractFirst( void ) ;
 		virtual ItemType extractLast( void ) ;
-		virtual bool replace( const ItemType valueOut, ItemType valueIn ) ;
+		virtual bool replace( ItemType valueOut, ItemType valueIn ) ;
 		// capacity and info functions
 		virtual bool isEmpty( void ) ;
 		virtual size listSize( void ) ;
-		virtual Pos indexOf( const ItemType value ) ;
-		virtual bool contained( const ItemType value ) ;
+		virtual Pos indexOf( ItemType value ) ;
+		virtual bool contained( ItemType value ) ;
 		// manage functions
 		virtual void emptyList( void ) ;
 		virtual void cleanRepeated( void ) ;
-        virtual void allocPtr( void ) ;
+		virtual void allocPtr( void ) ;
 };
-
-template <class ItemType>
-IList<ItemType>* factoryList( void ){
-	IList<ItemType>* toReturn = new DOList<ItemType> ;
-    toReturn->allocPtr() ;
-	return toReturn ;
-}
-
-
 
 //PRIVATE:
 template <class ItemType>
-Pos DOList<ItemType>::_indexOf_( const ItemType value ) {
+Pos DOList<ItemType>::_indexOf_( ItemType value ) {
 	Pos tr = -1 ;
 	if( !isEmpty() ){
 		Node *current = first ;
@@ -179,24 +170,58 @@ void DOList<ItemType>::insert( ItemType value ){
 	}
 }
 template <class ItemType>
-ItemType DOList<ItemType>::extractByValue( const ItemType value ) {
+ItemType DOList<ItemType>::extractByValue( ItemType value ) {
 	ItemType tr = NULL ;
 	if( !isEmpty() ){
 		Node *toExtract = _findNode_( value ) ;
-		if( toExtract != nullptr ) {
+		if( toExtract != nullptr ){
 			tr = toExtract->value ;
+			if( toExtract != first && toExtract != last ){
+				Node *prev = toExtract->prev ;
+				Node *next = toExtract->next ;
+
+				prev->next = next ;
+				next->prev = prev ;
+			} else if( toExtract == first ){
+				first = toExtract->next ;
+				Node *next = toExtract->next ;
+				if( next != nullptr ) next->prev = nullptr ;
+			} else if( toExtract == last ) {
+				last = toExtract->prev ;
+				Node *prev = toExtract->prev ;
+				if( prev != nullptr ) prev->next = nullptr ;
+			}
+			delete toExtract ;
 			itemCount-- ;
 		}
-
 	}
 	return tr ;
 }
 template <class ItemType>
-ItemType DOList<ItemType>::extractByIndex( const Pos position ) {
+ItemType DOList<ItemType>::extractByIndex( Pos position ) {
 	ItemType tr = NULL ;
 	if( !isEmpty() ){
 		Node *toExtract = _findNodeByIndex_( position ) ;
-		tr = toExtract->value ;
+		if( toExtract != nullptr ){
+			tr = toExtract->value ;
+			if( toExtract != first && toExtract != last ){
+				Node *prev = toExtract->prev ;
+				Node *next = toExtract->next ;
+
+				prev->next = next ;
+				next->prev = prev ;
+			} else if( toExtract == first ){
+				first = toExtract->next ;
+				Node *next = toExtract->next ;
+				if( next != nullptr ) next->prev = nullptr ;
+			} else if( toExtract == last ) {
+				last = toExtract->prev ;
+				Node *prev = toExtract->prev ;
+				if( prev != nullptr ) prev->next = nullptr ;
+			}
+			delete toExtract ;
+			itemCount-- ;
+		}
 	}
 	return tr ;
 }
@@ -236,7 +261,7 @@ ItemType DOList<ItemType>::extractLast( void ) {
 	return tr ;
 }
 template <class ItemType>
-bool DOList<ItemType>::replace( const ItemType valueOut, ItemType valueIn ) {
+bool DOList<ItemType>::replace( ItemType valueOut, ItemType valueIn ) {
 	bool tr = false ;
 	if( contained( valueOut ) ) {
 		extractByValue( valueOut ) ;
@@ -256,13 +281,13 @@ size DOList<ItemType>::listSize( void ) {
 	return itemCount ;
 }
 template <class ItemType>
-Pos DOList<ItemType>::indexOf( const ItemType value ) {
+Pos DOList<ItemType>::indexOf( ItemType value ) {
 	Pos tr = -1 ;
 	if( !isEmpty() ) tr = _indexOf_( value ) ;
 	return tr ;
 }
 template <class ItemType>
-bool DOList<ItemType>::contained( const ItemType value ) {
+bool DOList<ItemType>::contained( ItemType value ) {
 	Node *current = first ;
 	for( ;
 		current != nullptr && current->value != value ;
@@ -284,4 +309,11 @@ void DOList<ItemType>::cleanRepeated( void ) { }
 template <class ItemType>
 void DOList<ItemType>::allocPtr( void ) { }
 
+
+template <class ItemType>
+IList<ItemType>* factoryList( void ){
+	IList<ItemType>* toReturn = new DOList<ItemType> ;
+	toReturn->allocPtr() ;
+	return toReturn ;
+}
 #endif
