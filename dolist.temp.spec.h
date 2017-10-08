@@ -2,7 +2,7 @@
 // TEMPLATE SPECIALIZATIONS
 //
 
-#include <string>
+#include <string>  // for std::string operators ...
 
 //
 // TEMPLATE FOR CHAR *
