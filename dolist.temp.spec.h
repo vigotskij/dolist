@@ -147,10 +147,12 @@ class DOList<char*>: public IList<char*> {
 					first = toExtract->next ;
 					Node *next = toExtract->next ;
 					if( next != nullptr ) next->prev = nullptr ;
+					if( next == nullptr ) last = first ;
 				} else if( toExtract == last ) {
 					last = toExtract->prev ;
 					Node *prev = toExtract->prev ;
 					if( prev != nullptr ) prev->next = nullptr ;
+					if( prev == nullptr ) first = last ;
 				}
 
 				delete toExtract ;
@@ -176,10 +178,12 @@ class DOList<char*>: public IList<char*> {
 					first = toExtract->next ;
 					Node *next = toExtract->next ;
 					if( next != nullptr ) next->prev = nullptr ;
+					if( next == nullptr ) last = first ;
 				} else if( toExtract == last ) {
 					last = toExtract->prev ;
 					Node *prev = toExtract->prev ;
 					if( prev != nullptr ) prev->next = nullptr ;
+					if( prev == nullptr ) first = last ;
 				}
 
 				delete toExtract ;
@@ -408,10 +412,12 @@ class DOList<std::string>: public IList<std::string> {
 					first = toExtract->next ;
 					Node *next = toExtract->next ;
 					if( next != nullptr ) next->prev = nullptr ;
+					if( next == nullptr ) last = first ;
 				} else if( toExtract == last ) {
 					last = toExtract->prev ;
 					Node *prev = toExtract->prev ;
 					if( prev != nullptr ) prev->next = nullptr ;
+                    if( prev == nullptr ) first = last ;
 				}
 
 				delete toExtract ;
@@ -437,10 +443,12 @@ class DOList<std::string>: public IList<std::string> {
 					first = toExtract->next ;
 					Node *next = toExtract->next ;
 					if( next != nullptr ) next->prev = nullptr ;
+					if( next == nullptr ) last = first ;
 				} else if( toExtract == last ) {
 					last = toExtract->prev ;
 					Node *prev = toExtract->prev ;
 					if( prev != nullptr ) prev->next = nullptr ;
+                    if( prev == nullptr ) first = last ;
 				}
 
 				delete toExtract ;
